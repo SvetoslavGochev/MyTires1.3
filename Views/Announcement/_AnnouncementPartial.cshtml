@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AnnouncementServicesModel>
+
+<div class="row">
+    @foreach (var announcement in Model)
+    {
+     <div class="col-md-4">
+         <div class="card mb-3">
+             <img src="@announcement.ImageUrl" class="card-img-top" alt="@announcement.Marka - @announcement.Year (@announcement.CategoryName)">
+             <div class="card-body text-center">
+                 <h5 class="card-title text-center">@announcement.Marka @announcement.Size @announcement.CategoryName @announcement.Year</h5>
+                 <a asp-controller="Обява" asp-action="Info" asp-route-id="@announcement.Id" asp-route-information="@announcement.GetInformation()" class="btn btn-primary">Информация</a>
+                 @if (ViewBag.Edit == true || User.IsAdmin())
+                 {
+                     <a asp-controller="Обява" asp-action="Edit" asp-route-id="@announcement.Id" class="btn btn-warning">Редактирай</a>
+                     <a asp-controller="Обява" asp-action="Delete" asp-route-id="@announcement.Id" class="btn btn-danger">Триене</a>
+                 }
+             </div>
+         </div>
+     </div>
+    }
+</div>
